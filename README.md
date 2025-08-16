@@ -6,11 +6,11 @@
         - `gcc -o Client client.c -lws2_32`
         - `gcc -o server server.c -lws2_32`
     2. **Programmausführung**
-        - `server < ipv6 > < port > < snummer >`
-        - `client < ipv6 > < port > < snummer >`
+        - `server < ipv4 > < port > < snummer >`
+        - `client < ipv4 > < port > < snummer >`
 
 - **Visual Studio**
-    - Eigenschaftenseiten --> Debugging --> Befehlsargumente : ***< ipv6 > < port > < snummer >***
+    - Eigenschaftenseiten --> Debugging --> Befehlsargumente : ***< ipv4 > < port > < snummer >***
     - Eigenschaftenseiten --> Linker --> Eingabe --> Zusätzliche Abhängigkeiten : ***Ws2_32.lib***
 
 ### **Quellen**

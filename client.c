@@ -20,9 +20,6 @@ void f_wsadata(){
 SOCKET f_clientSocket(struct addrinfo* result){
     //ein TCP Socket bauen
     SOCKET fclientSocket = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
-    //AF_INET6 : Die IPv6-Adressfamilie (Internet Protocol Version 6).
-    //SOCK_STREAM : Dieser Sockettyp verwendet tcp.
-    //IPPROTO_TCP : Dies ist ein möglicher Wert, wenn der af-ParameterAF_INET oder AF_INET6 und der type-ParameterSOCK_STREAM ist.
 
     if (fclientSocket == INVALID_SOCKET) {
         perror("Client socket creation failed");
@@ -163,7 +160,7 @@ void f_close(SOCKET clientSocket){
 int main(int argc,char* argv[]) {
 
     if(argc < 4){
-        printf("Usage: %s <Ipv6- Adresse> <Port> <S-Nummer>",argv[0]);
+        printf("Usage: %s <ipv4- Adresse> <Port> <S-Nummer>",argv[0]);
         exit(1);
     }
 
@@ -186,7 +183,7 @@ int main(int argc,char* argv[]) {
     SOCKET clientSocket;
 
     memset(&hints, 0, sizeof(hints));  //set hints byte = 0, oder kann auch mit ZeroMemory nutzen.
-    hints.ai_family = AF_INET6;
+    hints.ai_family = AF_INET;
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_protocol = IPPROTO_TCP;
 
