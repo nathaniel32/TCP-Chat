@@ -1,10 +1,5 @@
 #include "../include/client.h"
-
-void f_delete(int index) {
-    for(int a = 1; a <= index + 5; a++) {
-        printf("\b \b");
-    }
-}
+#include <conio.h> //kbhit
 
 void f_chat(SOCKET clientSocket, char myid[]) {
     fd_set read_fds;

@@ -9,4 +9,7 @@ typedef struct {
     char text[MAX_TEXT_LENGTH];
 } packet;
 
+#define MAX_MESSAGE_LENGTH 1024
+#define MAX_BUFFER_LENGTH 1024
+
 #endif // PACKET_H

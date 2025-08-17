@@ -1,11 +1,5 @@
 #include "../include/server.h"
-
-void f_delete(int index) {
-    // delete text
-    for(int a = 1; a <= index + 5; a++) {
-        printf("\b \b");
-    }
-}
+#include <conio.h> //kbhit, _getch
 
 void f_chat(SOCKET newSocket, char myid[]) {
     char message[MAX_MESSAGE_LENGTH];

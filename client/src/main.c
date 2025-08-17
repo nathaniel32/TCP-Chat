@@ -7,15 +7,11 @@ int main(int argc, char* argv[]) {
         exit(1);
     }
 
-    /* u_long on= 1;                 //nonblocking Modus aktiviert
-    int res; */
-
     const char* IP = argv[1];
     const char* PORT = argv[2];
     char myid[10];
     strncpy(myid, argv[3], sizeof(myid) - 1);
     
-
     f_wsadata();
     
     struct addrinfo* result = NULL;
@@ -31,18 +27,16 @@ int main(int argc, char* argv[]) {
     hints.ai_protocol = IPPROTO_TCP;
 
     result = f_getaddrinfo(IP, PORT, hints, result);
-    clientSocket = f_clientSocket(result);
+    clientSocket = f_socket();
 
     f_connToServer(clientSocket, result);
     freeaddrinfo(result);
 
-    /* res = ioctlsocket(clientSocket, FIONBIO, &on);                   //Clientsocket wird auf nonblocking gesetzt       
-    if (res != NO_ERROR)
-        printf("ioctlsocket failed with error: %ld\n", res); */
-
     f_chat(clientSocket, myid);
 
-    f_close(clientSocket);
+    SOCKET sockets[SOCKET_NUM];
+    sockets[0] = clientSocket;
+    f_close(sockets, SOCKET_NUM);
 
     return 0;
 }

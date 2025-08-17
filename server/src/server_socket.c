@@ -1,42 +1,5 @@
 #include "../include/server.h"
 
-void f_wsadata() {
-    // Winsock Initialisieren
-    WSADATA wsaData;
-    if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) { // Ergebnis in wsaData gespeichert
-        perror("Failed to initialize Winsock");
-        exit(EXIT_FAILURE);
-    }
-}
-
-SOCKET f_serverSocket() {
-    // ein TCP Socket bauen
-    SOCKET fserverSocket = socket(AF_INET6, SOCK_STREAM, IPPROTO_TCP); 
-    // AF_INET6 : Die IPv6-Adressfamilie (Internet Protocol Version 6).
-    // SOCK_STREAM : Dieser Sockettyp verwendet tcp.
-    // IPPROTO_TCP : Dies ist ein möglicher Wert, wenn der af-Parameter AF_INET oder AF_INET6 und der type-Parameter SOCK_STREAM ist.
-
-    if (fserverSocket == INVALID_SOCKET) {
-        perror("Socket creation failed");
-        WSACleanup();
-        exit(EXIT_FAILURE);
-    }
-    printf("Server socket created successfully...\n");
-    return fserverSocket;
-}
-
-struct addrinfo* f_getaddrinfo(const char* IP, const char* PORT, SOCKET serverSocket, struct addrinfo* result, struct addrinfo hints) {
-    // Adressinformationen von Gastgebern und Diensten zu erhalten
-    // Ergebnis wird in result speichert
-    if (getaddrinfo(IP, PORT, &hints, &result) != 0) {
-        perror("getaddrinfo failed");
-        closesocket(serverSocket);
-        WSACleanup();
-        exit(EXIT_FAILURE);
-    }
-    return result;
-}
-
 void f_bind(const char* PORT, SOCKET serverSocket, struct addrinfo* result) {
     // Wird verwendet, um einen Socket einer bestimmten Adresse und einem bestimmten Port zuzuordnen (zu binden).
     if (bind(serverSocket, result->ai_addr, result->ai_addrlen) == SOCKET_ERROR) {
